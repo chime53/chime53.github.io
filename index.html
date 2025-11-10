@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shower Thoughts Interactive Poem</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #f7e8aa;
+    }
+
+    /* SCREEN WRAPPERS */
+    #screen1, #screen2 {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        transition: opacity 1s ease;
+    }
+
+    /* SCREEN 1 */
+    #screen1 {
+        background: url('https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&w=1400&q=60')
+            center center / cover no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    #enterText {
+        background: rgba(255,255,255,0.55);
+        padding: 20px 40px;
+        border-radius: 6px;
+        backdrop-filter: blur(6px);
+        font-size: 24px;
+        color: #222;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    #enterText:hover {
+        transform: scale(1.04);
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    /* SCREEN 2 */
+    #screen2 {
+        opacity: 0;
+        pointer-events: none;
+        background: url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1400&q=60')
+            center center / cover no-repeat;
+    }
+
+    /* HOTSPOTS */
+    .hotspot {
+        position: absolute;
+        width: 12%;
+        height: 18%;
+        cursor: pointer;
+        border: 0px solid transparent;
+        transform: translate(-50%, -50%);
+    }
+    /* angled positions for surreal layout */
+    #shampoo     { top: 25%; left: 60%; }
+    #conditioner { top: 45%; left: 45%; }
+    #bodywash    { top: 65%; left: 70%; }
+    #finalstep   { top: 80%; left: 30%; }
+
+    /* TEXT BUBBLE — dreamlike style */
+    .bubble {
+        position: absolute;
+        max-width: 40%;
+        padding: 12px 18px;
+        background: rgba(255,255,255,0.7);
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 14px rgba(255,255,255,0.8);
+        color: #111;
+        font-size: 18px;
+        line-height: 1.4;
+        opacity: 0;
+        transform: translate(-50%, -20%) scale(0.95);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        pointer-events: none;
+    }
+    .bubble.show {
+        opacity: 1;
+        transform: translate(-50%, -20%) scale(1);
+    }
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="screen1">
+    <div id="enterText">enter the shower</div>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="screen2">
+    <!-- Hotspots -->
+    <div id="shampoo" class="hotspot"></div>
+    <div id="conditioner" class="hotspot"></div>
+    <div id="bodywash" class="hotspot"></div>
+    <div id="finalstep" class="hotspot"></div>
+
+    <!-- Floating text bubbles -->
+    <div id="bubble1" class="bubble"></div>
+    <div id="bubble2" class="bubble"></div>
+    <div id="bubble3" class="bubble"></div>
+    <div id="bubble4" class="bubble"></div>
+</div>
+
+<script>
+let screen1 = document.getElementById("screen1");
+let screen2 = document.getElementById("screen2");
+
+screen1.onclick = () => {
+    screen1.style.opacity = "0";
+    setTimeout(() => {
+        screen1.style.pointerEvents = "none";
+        screen2.style.pointerEvents = "auto";
+        screen2.style.opacity = "1";
+    }, 900);
+};
+
+/* Stanzas from your poem */
+let stanza1 = `"Doubts and fears pour out... Hard work pays off, or so I'm told to believe."`;
+let stanza2 = `"I dreamt of a future defined by numbers, prophecy of failure inevitable."`;
+let stanza3 = `"Yet in the torrent comes warmth... happiness carried inside me."`;
+let stanza4 = `"My legacy to inspire, to move the world. We celebrate ourselves."`;
+
+let b1 = document.getElementById("bubble1");
+let b2 = document.getElementById("bubble2");
+let b3 = document.getElementById("bubble3");
+let b4 = document.getElementById("bubble4");
+
+let shampoo = document.getElementById("shampoo");
+let conditioner = document.getElementById("conditioner");
+let bodywash = document.getElementById("bodywash");
+let finalstep = document.getElementById("finalstep");
+
+shampoo.onclick = () => {
+    b1.innerText = stanza1;
+    b1.style.top = "30%";
+    b1.style.left = "80%";
+    b1.classList.add("show");
+};
+
+conditioner.onclick = () => {
+    b2.innerText = stanza2;
+    b2.style.top = "55%";
+    b2.style.left = "25%";
+    b2.classList.add("show");
+};
+
+bodywash.onclick = () => {
+    b3.innerText = stanza3;
+    b3.style.top = "70%";
+    b3.style.left = "88%";
+    b3.classList.add("show");
+};
+
+finalstep.onclick = () => {
+    b4.innerText = stanza4;
+    b4.style.top = "85%";
+    b4.style.left = "50%";
+    b4.classList.add("show");
+};
+</script>
+
+</body>
+</html>
